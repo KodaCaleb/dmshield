@@ -34,14 +34,14 @@ export default function PlayersPage() {
       <h1 className="text-2xl font-bold mb-4">Players</h1>
       <div className="flex gap-2 mb-4">
         <input
-          className="border p-1"
+          className="border p-1 text-black"
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <input
           type="number"
-          className="border p-1 w-20"
+          className="border p-1 w-20 text-black"
           value={hp}
           onChange={(e) => setHp(parseInt(e.target.value))}
         />

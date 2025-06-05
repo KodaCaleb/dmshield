@@ -19,7 +19,7 @@ export default function NotesPage() {
     <div>
       <h1 className="text-2xl font-bold mb-4">Notes</h1>
       <textarea
-        className="w-full h-96 p-2 border"
+        className="w-full h-96 p-2 border text-black"
         value={notes}
         onChange={(e) => setNotes(e.target.value)}
       />
