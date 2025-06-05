@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useNotes } from '../../context/NotesContext'
 
 export default function NotesPage() {
-  const { notes, addNote } = useNotes()
+  const { notes, addNote, removeNote } = useNotes()
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [selectedId, setSelectedId] = useState<number | null>(null)
@@ -13,6 +13,13 @@ export default function NotesPage() {
     addNote({ id: Date.now(), title, content })
     setTitle('')
     setContent('')
+  }
+
+  const handleDelete = (id: number) => {
+    if (confirm('are you sure you want to delete')) {
+      removeNote(id)
+      setSelectedId(null)
+    }
   }
 
   const selected = notes.find(n => n.id === selectedId)
@@ -60,9 +67,15 @@ export default function NotesPage() {
       </div>
 
       {selected && (
-        <div className="border-t border-gray-700 pt-4">
+        <div className="border-t border-gray-700 pt-4 space-y-2">
           <h2 className="text-xl font-bold mb-2">{selected.title}</h2>
           <p className="whitespace-pre-wrap">{selected.content}</p>
+          <button
+            className="bg-red-600 hover:bg-red-700 text-white px-3 rounded"
+            onClick={() => handleDelete(selected.id)}
+          >
+            Delete
+          </button>
         </div>
       )}
     </div>
