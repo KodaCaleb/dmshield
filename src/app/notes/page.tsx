@@ -6,7 +6,7 @@ export default function NotesPage() {
   const { notes, addNote, removeNote } = useNotes()
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
-  const [selectedId, setSelectedId] = useState<number | null>(null)
+  const [openId, setOpenId] = useState<number | null>(null)
 
   const handleAdd = () => {
     if (!title && !content) return
@@ -18,11 +18,9 @@ export default function NotesPage() {
   const handleDelete = (id: number) => {
     if (confirm('are you sure you want to delete')) {
       removeNote(id)
-      setSelectedId(null)
+      setOpenId(null)
     }
   }
-
-  const selected = notes.find(n => n.id === selectedId)
 
   return (
     <div className="max-w-4xl mx-auto space-y-4">
@@ -52,32 +50,32 @@ export default function NotesPage() {
         {notes.length === 0 ? (
           <p className="text-gray-400">No notes yet.</p>
         ) : (
-          <ul className="space-y-1">
+          <ul className="space-y-2">
             {notes.map((n) => (
-              <li
-                key={n.id}
-                className="cursor-pointer text-blue-400 hover:underline"
-                onClick={() => setSelectedId(n.id)}
-              >
-                {n.title}
+              <li key={n.id} className="bg-gray-800 border border-gray-700 rounded">
+                <button
+                  className="w-full text-left p-2 flex justify-between items-center"
+                  onClick={() => setOpenId(openId === n.id ? null : n.id)}
+                >
+                  <span>{n.title}</span>
+                  <span className="text-sm text-gray-400">{openId === n.id ? '▲' : '▼'}</span>
+                </button>
+                {openId === n.id && (
+                  <div className="p-2 pt-0 space-y-2">
+                    <p className="whitespace-pre-wrap">{n.content}</p>
+                    <button
+                      className="bg-red-600 hover:bg-red-700 text-white px-3 rounded"
+                      onClick={() => handleDelete(n.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )}
               </li>
             ))}
           </ul>
         )}
       </div>
-
-      {selected && (
-        <div className="border-t border-gray-700 pt-4 space-y-2">
-          <h2 className="text-xl font-bold mb-2">{selected.title}</h2>
-          <p className="whitespace-pre-wrap">{selected.content}</p>
-          <button
-            className="bg-red-600 hover:bg-red-700 text-white px-3 rounded"
-            onClick={() => handleDelete(selected.id)}
-          >
-            Delete
-          </button>
-        </div>
-      )}
     </div>
   )
 }
