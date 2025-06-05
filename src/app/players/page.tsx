@@ -1,32 +1,17 @@
 'use client'
 import { useState } from 'react'
-
-interface Player {
-  id: number
-  name: string
-  hp: number
-}
+import { usePlayers } from '../../context/PlayersContext'
 
 export default function PlayersPage() {
-  const [players, setPlayers] = useState<Player[]>([])
+  const { players, addPlayer, adjustHp, removePlayer } = usePlayers()
   const [name, setName] = useState('')
   const [hp, setHp] = useState(10)
 
-  const addPlayer = () => {
+  const handleAddPlayer = () => {
     if (!name) return
-    setPlayers((prev) => [...prev, { id: Date.now(), name, hp }])
+    addPlayer({ id: Date.now(), name, hp })
     setName('')
     setHp(10)
-  }
-
-  const adjustHp = (id: number, delta: number) => {
-    setPlayers((prev) =>
-      prev.map((p) => (p.id === id ? { ...p, hp: p.hp + delta } : p))
-    )
-  }
-
-  const removePlayer = (id: number) => {
-    setPlayers((prev) => prev.filter((p) => p.id !== id))
   }
 
   return (
@@ -45,7 +30,7 @@ export default function PlayersPage() {
           value={hp}
           onChange={(e) => setHp(parseInt(e.target.value))}
         />
-        <button className="bg-blue-500 text-white px-2" onClick={addPlayer}>
+        <button className="bg-blue-500 text-white px-2" onClick={handleAddPlayer}>
           Add
         </button>
       </div>
