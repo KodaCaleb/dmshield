@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'DMShield - A tool for Dungeon Masters',
@@ -16,7 +14,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>
+        <nav className="bg-gray-800 text-white p-4 flex gap-4">
+          <Link href="/">Home</Link>
+          <Link href="/notes">Notes</Link>
+          <Link href="/players">Players</Link>
+          <Link href="/combat">Combat</Link>
+        </nav>
+        <div className="p-4">{children}</div>
+      </body>
     </html>
   )
 }
