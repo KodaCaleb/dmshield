@@ -22,7 +22,7 @@ export default function Home() {
           {players.length === 0 ? (
             <p className="text-gray-400 text-sm">No players added.</p>
           ) : (
-            <ul className="text-sm space-y-1">
+            <ul className="text-sm space-y-1 max-h-60 overflow-y-auto pr-2">
               {players.map(p => (
                 <li key={p.id} className="flex justify-between">
                   <span>{p.name}</span>
@@ -41,7 +41,7 @@ export default function Home() {
           {enemies.length === 0 ? (
             <p className="text-gray-400 text-sm">No enemies tracked.</p>
           ) : (
-            <ul className="text-sm space-y-1">
+            <ul className="text-sm space-y-1 max-h-60 overflow-y-auto pr-2">
               {enemies.map(e => (
                 <li key={e.id} className="flex justify-between">
                   <span>{e.name}</span>
