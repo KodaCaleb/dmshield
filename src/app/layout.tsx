@@ -21,8 +21,8 @@ export default function RootLayout({
         <PlayersProvider>
           <EnemiesProvider>
             <NotesProvider>
-              <nav className="bg-gray-800 text-gray-100 p-4 flex gap-4 border-b border-gray-700">
-                <Link href="/">Home</Link>
+              <nav className="bg-gray-800 text-gray-100 p-4 flex items-center gap-4 border-b border-gray-700">
+                <Link href="/" className="text-xl font-bold mr-4">DMShield</Link>
                 <Link href="/notes">Notes</Link>
                 <Link href="/players">Players</Link>
                 <Link href="/combat">Combat</Link>

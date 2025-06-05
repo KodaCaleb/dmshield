@@ -12,7 +12,6 @@ export default function Home() {
 
   return (
     <div className="py-8">
-      <h1 className="text-4xl font-bold mb-6 text-center">DMShield</h1>
       <div className="grid md:grid-cols-3 gap-4">
         <div className="bg-gray-800 p-4 rounded border border-gray-700">
           <div className="flex items-baseline justify-between mb-2">
