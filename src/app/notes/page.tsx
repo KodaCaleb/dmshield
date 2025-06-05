@@ -83,7 +83,7 @@ export default function NotesPage() {
                   <div className="p-2 pt-0 space-y-2">
                     <p className="whitespace-pre-wrap">{n.content}</p>
                     <button
-                      className="bg-red-600 hover:bg-red-700 text-white px-3 rounded"
+                      className="bg-transparent border border-red-600 text-red-600 hover:bg-red-600 hover:text-white px-3 rounded"
                       onClick={() => handleDelete(n.id)}
                     >
                       Delete
