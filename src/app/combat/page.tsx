@@ -1,32 +1,17 @@
 'use client'
 import { useState } from 'react'
-
-interface Enemy {
-  id: number
-  name: string
-  hp: number
-}
+import { useEnemies } from '../../context/EnemiesContext'
 
 export default function CombatPage() {
-  const [enemies, setEnemies] = useState<Enemy[]>([])
+  const { enemies, addEnemy, adjustHp, removeEnemy } = useEnemies()
   const [name, setName] = useState('')
   const [hp, setHp] = useState(10)
 
-  const addEnemy = () => {
+  const handleAddEnemy = () => {
     if (!name) return
-    setEnemies((prev) => [...prev, { id: Date.now(), name, hp }])
+    addEnemy({ id: Date.now(), name, hp })
     setName('')
     setHp(10)
-  }
-
-  const adjustHp = (id: number, delta: number) => {
-    setEnemies((prev) =>
-      prev.map((e) => (e.id === id ? { ...e, hp: e.hp + delta } : e))
-    )
-  }
-
-  const removeEnemy = (id: number) => {
-    setEnemies((prev) => prev.filter((e) => e.id !== id))
   }
 
   return (
@@ -45,7 +30,7 @@ export default function CombatPage() {
           value={hp}
           onChange={(e) => setHp(parseInt(e.target.value))}
         />
-        <button className="bg-blue-500 text-white px-2" onClick={addEnemy}>
+        <button className="bg-blue-500 text-white px-2" onClick={handleAddEnemy}>
           Add
         </button>
       </div>
