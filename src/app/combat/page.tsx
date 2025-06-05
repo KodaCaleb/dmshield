@@ -15,38 +15,38 @@ export default function CombatPage() {
   }
 
   return (
-    <div>
+    <div className="max-w-4xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Combat Tracker</h1>
       <div className="flex gap-2 mb-4">
         <input
-          className="border p-1 text-black"
+          className="border border-gray-600 bg-gray-800 text-gray-100 p-1 rounded"
           placeholder="Enemy"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <input
           type="number"
-          className="border p-1 w-20 text-black"
+          className="border border-gray-600 bg-gray-800 text-gray-100 p-1 w-20 rounded"
           value={hp}
           onChange={(e) => setHp(parseInt(e.target.value))}
         />
-        <button className="bg-blue-500 text-white px-2" onClick={handleAddEnemy}>
+        <button className="bg-blue-600 hover:bg-blue-700 text-white px-3 rounded" onClick={handleAddEnemy}>
           Add
         </button>
       </div>
       <ul>
         {enemies.map((e) => (
-          <li key={e.id} className="mb-2 flex items-center gap-2">
+          <li key={e.id} className="mb-2 flex items-center gap-2 bg-gray-800 p-2 rounded">
             <span className="font-semibold mr-2">{e.name}</span>
             <button
-              className="px-2 bg-gray-200"
+              className="px-2 bg-gray-700 rounded"
               onClick={() => adjustHp(e.id, -1)}
             >
               -
             </button>
             <span>{e.hp} hp</span>
             <button
-              className="px-2 bg-gray-200"
+              className="px-2 bg-gray-700 rounded"
               onClick={() => adjustHp(e.id, 1)}
             >
               +
