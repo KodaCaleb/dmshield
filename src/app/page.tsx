@@ -1,19 +1,14 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePlayers } from '../context/PlayersContext'
 import { useEnemies } from '../context/EnemiesContext'
+import { useNotes } from '../context/NotesContext'
 
 export default function Home() {
   const { players } = usePlayers()
   const { enemies } = useEnemies()
-  const [notes, setNotes] = useState('')
-
-  useEffect(() => {
-    const stored = localStorage.getItem('dmshield.notes')
-    if (stored) setNotes(stored)
-  }, [])
+  const { notes } = useNotes()
 
   return (
     <div className="py-8">
@@ -62,12 +57,14 @@ export default function Home() {
             <h2 className="text-xl font-bold">Notes</h2>
             <Link href="/notes" className="text-blue-400 text-sm">Open</Link>
           </div>
-          {notes ? (
-            <div className="text-sm whitespace-pre-wrap max-h-60 overflow-y-auto">
-              {notes}
-            </div>
-          ) : (
+          {notes.length === 0 ? (
             <p className="text-gray-400 text-sm">No notes yet.</p>
+          ) : (
+            <ul className="text-sm space-y-1 max-h-60 overflow-y-auto">
+              {notes.map((n) => (
+                <li key={n.id}>{n.title}</li>
+              ))}
+            </ul>
           )}
         </div>
       </div>
